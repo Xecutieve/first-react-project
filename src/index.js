@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
+import skills from "./skills.js";
 
 function App() {
   return (
@@ -38,17 +39,19 @@ function SkillList() {
   return (
     <div>
       <ul class="skill-list">
-        <Skill skill="HTML" style={{ backgroundColor: "blue" }} />
-        <Skill skill="CSS" style={{ backgroundColor: "red" }} />
-        <Skill skill="JavaScript" style={{ backgroundColor: "yellow" }} />
-        <Skill skill="React" style={{ backgroundColor: "lightBlue" }} />
-        <Skill
-          skill="Git, Github and Gitlab"
-          style={{ backgroundColor: "orange" }}
-        />
-        <Skill skill="PostgreSQL" style={{ backgroundColor: "gray" }} />
-        <Skill skill="BackEnd" style={{ backgroundColor: "green" }} />
-        <Skill skill="Postman" style={{ backgroundColor: "khaki" }} />
+        {skills.map((skill) => (
+          <Skill
+            skill={skill.skill}
+            style={{ backgroundColor: skill.color }}
+            emoji={
+              skill.level === "beginner"
+                ? "👶🏻"
+                : skill.level === "intermediate"
+                ? "👍🏻"
+                : "💪🏻"
+            }
+          />
+        ))}
       </ul>
     </div>
   );
@@ -57,7 +60,7 @@ function SkillList() {
 function Skill(props) {
   return (
     <li class="skill" style={props.style}>
-      {props.skill}
+      {props.skill} {props.emoji}
     </li>
   );
 }
